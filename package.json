@@ -1,27 +1,12 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "name": "ecoport",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.11.0",
-    "ethers": "^6.15.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.7.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-=======
+
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "hardhat": "^2.26.1"
+
   "name": "ecoport-contract",
   "version": "1.0.0",
   "main": "index.js",
->>>>>>> 824192993bbd3db1fe89b81ded81cd22460b6f92
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,26 +18,8 @@
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "hardhat": "^2.26.1"
   },
-<<<<<<< HEAD
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-=======
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
-    "hardhat": "^2.26.1"
->>>>>>> main
-=======
   "dependencies": {
     "@openzeppelin/contracts": "^5.4.0"
->>>>>>> 824192993bbd3db1fe89b81ded81cd22460b6f92
+
   }
 }
