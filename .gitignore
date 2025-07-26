@@ -1,3 +1,38 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+=======
+node_modules
+.env
+>>>>>>> 824192993bbd3db1fe89b81ded81cd22460b6f92
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+<<<<<<< HEAD
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+=======
 node_modules
 .env
 
@@ -15,3 +50,8 @@ node_modules
 
 # Hardhat Ignition default folder for deployments against a local node
 ignition/deployments/chain-31337
+>>>>>>> main
+=======
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/chain-31337
+>>>>>>> 824192993bbd3db1fe89b81ded81cd22460b6f92
