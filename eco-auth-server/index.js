@@ -6,14 +6,18 @@ import authRoutes from "./routes/auth.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Configure CORS for frontend on port 3000
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
-app.get("/", (req, res) => {
+app.get("/metamask-login", (req, res) => {
   res.send("MetaMask Auth Server is running 🚀");
 });
 

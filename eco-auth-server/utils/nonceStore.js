@@ -1,8 +1,13 @@
 const nonces = new Map();
+import crypto from "crypto";
 
 export function getNonce(address) {
-  const nonce = `Login to EcoApp at ${Date.now()}`;
-  nonces.set(address.toLowerCase(), nonce);
+  let nonce = nonces.get(address.toLowerCase());
+  if (!nonce) {
+    // Generate a more user-friendly nonce
+    nonce = `Login to ECOPORT - Nonce: ${crypto.randomBytes(8).toString("hex")}`;
+    nonces.set(address.toLowerCase(), nonce);
+  }
   return nonce;
 }
 
