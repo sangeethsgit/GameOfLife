@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "name": "ecoport",
   "version": "0.1.0",
   "private": true,
@@ -16,18 +17,23 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+=======
+  "name": "ecoport-contract",
+  "version": "1.0.0",
+  "main": "index.js",
+>>>>>>> 824192993bbd3db1fe89b81ded81cd22460b6f92
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "hardhat": "^2.26.1"
   },
+<<<<<<< HEAD
   "browserslist": {
     "production": [
       ">0.2%",
@@ -44,5 +50,9 @@
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "hardhat": "^2.26.1"
 >>>>>>> main
+=======
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0"
+>>>>>>> 824192993bbd3db1fe89b81ded81cd22460b6f92
   }
 }
