@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import './HomePage.css';
 
@@ -44,7 +45,12 @@ function HomePage() {
   return (
     <div className="homepage">
       <header className="header">
-        <h1>ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
+        <div className="top-bar">
+          <h1>ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
+          <Link to="/auth">
+            <button className="auth-button">Login / Register</button>
+          </Link>
+        </div>
         <p>Smart, sustainable transit across Kochi</p>
       </header>
 
