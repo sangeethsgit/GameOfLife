@@ -1,6 +1,7 @@
 // src/pages/AuthPage.js
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
+import './AuthPage.css';
 
 function AuthPage() {
   const [account, setAccount] = useState(null);
@@ -47,6 +48,8 @@ function AuthPage() {
       if (response.ok && data.token) {
         localStorage.setItem('token', data.token);
         alert('Login successful!');
+        // Optional: redirect user after login
+        // window.location.href = '/';
       } else {
         setError(data.error || 'Login failed.');
       }
@@ -57,11 +60,11 @@ function AuthPage() {
   }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Login with MetaMask</h2>
+    <div className="auth-container">
+      <h2>Login to ECOPORT</h2>
 
       {!account ? (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <button onClick={connectWallet}>Connect MetaMask Wallet</button>
       ) : (
         <>
           <p>Connected: {account}</p>
@@ -71,7 +74,7 @@ function AuthPage() {
         </>
       )}
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }
