@@ -178,3 +178,21 @@ body, html, .homepage {
     background-position: 200% 0;
   }
 }
+
+.reward-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  background: var(--accent-hover);
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.reward-button:hover {
+  background: var(--accent);
+}
