@@ -1,89 +1,294 @@
-.dashboard-container {
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
 }
 
-.rewards-table {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f7fafc;
+}
+
+/* Main dashboard container - targets the div with p-6 class */
+div[class*="p-6"] {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Alternative targeting for any dashboard container */
+div:has(h2:contains("Welcome")) {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Universal dashboard styling */
+div {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Headings */
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #4299e1;
+  display: inline-block;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+/* Table styles */
+table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 40px;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
 }
 
-.rewards-table th,
-.rewards-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
-
-.rewards-table th {
-  background-color: #f1f2f6;
-}
-
-.graph-wrapper {
-  background: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.challenge-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.challenge-form input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.challenge-form button {
-  background-color: #00b894;
+table th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 16px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.challenge-list ul {
-  padding-left: 16px;
+table td {
+  padding: 16px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+  font-weight: 500;
 }
 
-.popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+table tbody tr:hover {
+  background-color: #f7fafc;
+  transform: scale(1.01);
+  transition: all 0.2s ease;
 }
 
-.popup-box {
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Chart container - center the chart */
+.recharts-wrapper {
+  margin: 2rem auto; /* Changed from '2rem 0' to '2rem auto' to center */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background: white;
   padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 10px;
+  display: flex; /* Added to help with centering */
+  justify-content: center; /* Center the chart horizontally */
+  align-items: center; /* Center the chart vertically */
+}
+
+/* Also target the chart container more specifically */
+.recharts-wrapper > div {
+  margin: 0 auto; /* Center the chart content */
+}
+
+/* Alternative targeting for the chart */
+.recharts-wrapper svg {
+  margin: 0 auto; /* Center the SVG chart */
+  display: block; /* Ensure block display for centering */
+}
+
+/* Form inputs */
+input {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  background-color: white;
+  transform: translateY(-2px);
+}
+
+input::placeholder {
+  color: #a0aec0;
+}
+
+/* Button styles */
+button {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  color: white;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px rgba(66, 153, 225, 0.2);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(66, 153, 225, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(66, 153, 225, 0.2);
+}
+
+/* Challenge list */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 20px;
+  margin-bottom: 12px;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  color: #2d3748;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+li:hover {
+  border-color: #4299e1;
+  box-shadow: 0 4px 8px rgba(66, 153, 225, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Paragraph styles */
+p {
+  color: #718096;
+  margin: 1rem 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Margin utilities */
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-8 { margin-top: 2rem; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+  div[class*="p-6"] {
+    padding: 16px;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  table {
+    font-size: 14px;
+  }
+  
+  table th,
+  table td {
+    padding: 12px 8px;
+  }
+  
+  .recharts-wrapper {
+    width: 100% !important;
+    height: 250px !important;
+  }
+  
+  input {
+    padding: 14px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  button {
+    width: 100%;
+    padding: 16px;
+  }
+}
+
+/* Loading and error states */
+.loading {
   text-align: center;
+  padding: 3rem;
+  color: #718096;
+  font-size: 18px;
 }
 
-.popup-buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-around;
+.error {
+  color: #e53e3e;
+  background: #fed7d7;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border: 1px solid #feb2b2;
+  font-weight: 500;
 }
 
-.popup-buttons button:first-child {
-  background-color: #00b894;
-}
-
-.popup-buttons button:last-child {
-  background-color: #d63031;
+/* Success states */
+.success {
+  color: #38a169;
+  background: #c6f6d5;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border: 1px solid #9ae6b4;
+  font-weight: 500;
 }

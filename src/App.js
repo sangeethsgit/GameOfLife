@@ -1,6 +1,7 @@
 // src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import UserDashboard from './pages/UserDashboard';
@@ -11,16 +12,21 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/user" element={<UserDashboard />} />
-        <Route path="/verifier" element={<VerifierDashboard />} />
-        <Route path="/rewards" element={<Rewards/>} />
-        <Route path="/user" element={<UserDashboard/>} />
-        <Route path="/pay" element={<Payment/>} />
+        <div className="app">
+          <Navigation />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/user" element={<UserDashboard />} />
+              <Route path="/verifier" element={<VerifierDashboard />} />
+              <Route path="/rewards" element={<Rewards/>} />
+              <Route path="/user" element={<UserDashboard/>} />
+              <Route path="/pay" element={<Payment/>} />
 
-      </Routes>
+            </Routes>
+          </main>
+        </div>
       </AuthProvider>
     </Router>
   );

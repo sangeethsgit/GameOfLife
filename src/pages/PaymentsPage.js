@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PaymentFormFields from './PaymentFormFields';
 import ConfirmationPopup from './ConfirmationPopup';
+import { useNavigate } from 'react-router-dom';
 import './PaymentPage.css';
 
 const PaymentsPage = () => {
@@ -8,6 +9,7 @@ const PaymentsPage = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [ticket, setTicket] = useState(null);
+  const navigate = useNavigate();
 
   const fareMap = {
     metro: 30,
@@ -23,10 +25,19 @@ const PaymentsPage = () => {
       mode,
       method: paymentMethod,
       fare: fareMap[mode],
-      date: new Date().toLocaleString()
+      date: new Date().toLocaleString(),
+      ticketId: `TKT-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
     };
     setTicket(ticketDetails);
     setShowPopup(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPopup(false);
+    // Navigate to rewards page after showing ticket
+    setTimeout(() => {
+      navigate("/rewards");
+    }, 2000); // Wait 2 seconds before navigating
   };
 
   return (
@@ -61,7 +72,11 @@ const PaymentsPage = () => {
       </form>
 
       {showPopup && ticket && (
-        <ConfirmationPopup ticket={ticket} onClose={() => setShowPopup(false)} />
+        <ConfirmationPopup 
+          ticket={ticket} 
+          onClose={handlePaymentSuccess}
+          onConfirm={handlePaymentSuccess}
+        />
       )}
     </div>
   );
