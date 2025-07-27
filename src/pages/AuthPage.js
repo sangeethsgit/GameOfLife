@@ -49,8 +49,8 @@ const LoginWithMetaMask = () => {
 
       console.log("Verification response:", response.data);
 
-      if (response.ok && data.token) {
-        localStorage.setItem('token', data.token);
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
         alert('Login successful!');
         // Optional: redirect user after login
         // window.location.href = '/';
@@ -72,7 +72,7 @@ const LoginWithMetaMask = () => {
     <div className="auth-container">
       <h2>Login to ECOPORT</h2>
 
-      {!account ? (
+      {!address ? (
         <button onClick={connectWallet}>Connect MetaMask Wallet</button>
       ) : (
         <button onClick={connectWallet}>Connect Wallet</button>

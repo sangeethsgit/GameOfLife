@@ -17,6 +17,10 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "hardhat": "^2.26.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -39,11 +43,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
-    "hardhat": "^2.26.1"
-    }
-
-    }
+    ]
   }
+}
