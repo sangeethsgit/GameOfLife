@@ -39,11 +39,12 @@ function HomePage() {
     setError('');
 
     const mockRoutes = [
-      { id: 1, mode: 'Kochi Metro 🚇', duration: '30 mins', price: 40, eco: '🌿 High' },
-      { id: 2, mode: 'Electric Bus ⚡️🚌', duration: '45 mins', price: 25, eco: '🌱 High' },
-      { id: 3, mode: 'City Bus 🚌', duration: '50 mins', price: 20, eco: '🌾 Medium' },
-      { id: 4, mode: 'Water Metro 🚤', duration: '35 mins', price: 30, eco: '🌿 High' }
-    ];
+  { id: 0, mode: 'MyByk 🚴‍♂️', duration: '25 mins', price: 10, eco: '🌟 Ultra' }, // new most eco-friendly option
+  { id: 1, mode: 'Kochi Metro 🚇', duration: '30 mins', price: 40, eco: '🌿 High' },
+  { id: 2, mode: 'Electric Bus ⚡️🚌', duration: '45 mins', price: 25, eco: '🌱 High' },
+  { id: 3, mode: 'City Bus 🚌', duration: '50 mins', price: 20, eco: '🌾 Medium' },
+  { id: 4, mode: 'Water Metro 🚤', duration: '35 mins', price: 30, eco: '🌿 High' }
+];
 
     setTimeout(() => {
       setRoutes(mockRoutes);
@@ -98,11 +99,17 @@ function HomePage() {
             </div>
 
             <button type="submit" disabled={isLoading}>
-              {isLoading ? "Searching..." : "Find Routes"}
+              {isLoading ? "Searching..." : "View Transport Modes"}
             </button>
 
             {error && <div className="error">{error}</div>}
           </form>
+        <Link to="/rewards" style={{ textDecoration: 'none' }}>
+          <button type="button" className="reward-button">
+            🎁 See Rewards
+          </button>
+        </Link>
+
         </section>
 
         <section className="results">

@@ -6,19 +6,19 @@ import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import UserDashboard from './pages/UserDashboard';
 import VerifierDashboard from './pages/VerifierDashboard';
+import Rewards from './pages/rewards';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/user" element={<UserDashboard />} />
-          <Route path="/verifier" element={<VerifierDashboard />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/user" element={<UserDashboard />} />
+        <Route path="/verifier" element={<VerifierDashboard />} />
+        <Route path="/rewards" element={<Rewards />} />
+      </Routes>
+    </Router>
   );
 }
 
