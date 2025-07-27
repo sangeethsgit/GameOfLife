@@ -10,6 +10,7 @@ import Payment from './pages/PaymentsPage';
 function App() {
   return (
     <Router>
+      <AuthProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/auth" element={<AuthPage />} />
@@ -20,6 +21,7 @@ function App() {
         <Route path="/pay" element={<Payment/>} />
 
       </Routes>
+      </AuthProvider>
     </Router>
   );
 }

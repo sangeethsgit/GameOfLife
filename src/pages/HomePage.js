@@ -62,7 +62,7 @@ function HomePage() {
     <div className="homepage">
       <header className="header">
         <div className="top-bar">
-          <h1>ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
+          <h1>ECOPORT</h1>
           {isAuthenticated ? (
             <div className="auth-section">
               <span className="user-address">
