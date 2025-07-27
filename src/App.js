@@ -6,19 +6,20 @@ import AuthPage from './pages/AuthPage';
 import UserDashboard from './pages/UserDashboard';
 import VerifierDashboard from './pages/VerifierDashboard';
 import Rewards from './pages/rewards';
-
+import Payment from './pages/PaymentsPage';
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/user" element={<UserDashboard />} />
-          <Route path="/verifier" element={<VerifierDashboard />} />
-          <Route path="/rewards" element={<Rewards />} />
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/user" element={<UserDashboard />} />
+        <Route path="/verifier" element={<VerifierDashboard />} />
+        <Route path="/rewards" element={<Rewards/>} />
+        <Route path="/user" element={<UserDashboard/>} />
+        <Route path="/pay" element={<Payment/>} />
+
+      </Routes>
     </Router>
   );
 }
