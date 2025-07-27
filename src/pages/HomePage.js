@@ -51,10 +51,33 @@ function HomePage() {
 
   return (
     <div className="homepage">
+<<<<<<< HEAD
+      <header className="header">
+        <div className="top-bar">
+          <h1>ECOPORT</h1>
+          {isAuthenticated ? (
+            <div className="auth-section">
+              <span className="user-address">
+                {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
+              </span>
+              <button className="auth-button logout" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/auth">
+              <button className="auth-button">Login / Register</button>
+            </Link>
+          )}
+        </div>
+        <p>Smart, sustainable transit across Kochi</p>
+      </header>
+=======
       <div className="hero-section">
         <h1>Welcome to ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
         <p className="sub-title">Smart, sustainable transit across Kochi</p>
       </div>
+>>>>>>> e5f56bc907dc20341123edd4132838e1fc3d2554
 
       <main className="main-content">
         <section className="form-section">
