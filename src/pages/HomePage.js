@@ -78,7 +78,7 @@ function HomePage() {
             </Link>
           )}
         </div>
-        <p>Smart, sustainable transit across Kochi</p>
+        <p className="sub-title"> Smart, sustainable transit across Kochi</p>
       </header>
 
       <main className="main-content">
