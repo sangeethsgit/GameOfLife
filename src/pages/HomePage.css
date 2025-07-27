@@ -53,6 +53,31 @@ body, html, .homepage {
   background-color: #e1f3ef;
 }
 
+.auth-button.large {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Login Prompt */
+.login-prompt {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.login-prompt h2 {
+  color: #2f7b66;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.login-prompt p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
 /* Main content */
 .main-content {
   max-width: 800px;
@@ -190,7 +215,7 @@ body, html, .homepage {
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .reward-button:hover {

@@ -1,4 +1,3 @@
-import EcoScore from '../components/EcoScore';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
@@ -19,12 +18,19 @@ function HomePage() {
 
   const handleLogout = () => {
     logout();
-    // Optionally redirect to auth page
-    // window.location.href = '/auth';
+    // Clear form when logging out
+    setFrom('');
+    setTo('');
+    setRoutes([]);
+    setError('');
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
+    if (!isAuthenticated) {
+      setError('Please login first to search for routes.');
+      return;
+    }
     if (!from || !to) {
       setError('Please select both a starting and destination point.');
       return;
@@ -77,39 +83,50 @@ function HomePage() {
 
       <main className="main-content">
         <section className="form-section">
-          <form onSubmit={handleSearch} className="search-form">
-            <div className="field">
-              <label htmlFor="from">From</label>
-              <select id="from" value={from} onChange={(e) => setFrom(e.target.value)}>
-                <option value="">Select starting point</option>
-                {kochiPlaces.map(place => (
-                  <option key={place} value={place}>{place}</option>
-                ))}
-              </select>
+          {!isAuthenticated ? (
+            <div className="login-prompt">
+              <h2>Welcome to ECOPORT!</h2>
+              <p>Please login or register to start planning your eco-friendly journey.</p>
+              <Link to="/auth">
+                <button className="auth-button large">Login / Register</button>
+              </Link>
             </div>
+          ) : (
+            <>
+              <form onSubmit={handleSearch} className="search-form">
+                <div className="field">
+                  <label htmlFor="from">From</label>
+                  <select id="from" value={from} onChange={(e) => setFrom(e.target.value)}>
+                    <option value="">Select starting point</option>
+                    {kochiPlaces.map(place => (
+                      <option key={place} value={place}>{place}</option>
+                    ))}
+                  </select>
+                </div>
 
-            <div className="field">
-              <label htmlFor="to">To</label>
-              <select id="to" value={to} onChange={(e) => setTo(e.target.value)}>
-                <option value="">Select destination</option>
-                {kochiPlaces.map(place => (
-                  <option key={place} value={place}>{place}</option>
-                ))}
-              </select>
-            </div>
+                <div className="field">
+                  <label htmlFor="to">To</label>
+                  <select id="to" value={to} onChange={(e) => setTo(e.target.value)}>
+                    <option value="">Select destination</option>
+                    {kochiPlaces.map(place => (
+                      <option key={place} value={place}>{place}</option>
+                    ))}
+                  </select>
+                </div>
 
-            <button type="submit" disabled={isLoading}>
-              {isLoading ? "Searching..." : "View Transport Modes"}
-            </button>
+                <button type="submit" disabled={isLoading}>
+                  {isLoading ? "Searching..." : "View Transport Modes"}
+                </button>
 
-            {error && <div className="error">{error}</div>}
-          </form>
-        <Link to="/rewards" style={{ textDecoration: 'none' }}>
-          <button type="button" className="reward-button">
-            🎁 See Rewards
-          </button>
-        </Link>
-
+                {error && <div className="error">{error}</div>}
+              </form>
+              <Link to="/rewards" style={{ textDecoration: 'none' }}>
+                <button type="button" className="reward-button">
+                  🎁 See Rewards
+                </button>
+              </Link>
+            </>
+          )}
         </section>
 
         <section className="results">

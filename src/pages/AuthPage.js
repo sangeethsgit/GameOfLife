@@ -15,7 +15,7 @@ const LoginWithMetaMask = () => {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/user");
     }
   }, [isAuthenticated, navigate]);
 

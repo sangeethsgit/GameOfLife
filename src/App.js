@@ -1,4 +1,3 @@
-
 // src/App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -11,13 +10,15 @@ import Rewards from './pages/rewards';
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/user" element={<UserDashboard />} />
-        <Route path="/verifier" element={<VerifierDashboard />} />
-        <Route path="/rewards" element={<Rewards />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/verifier" element={<VerifierDashboard />} />
+          <Route path="/rewards" element={<Rewards />} />
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 }
