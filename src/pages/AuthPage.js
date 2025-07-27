@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 // import "./Homepage.css";  // For CSS variables and shared styles
 import "./AuthPage.css";  // Your new auth page styles
@@ -7,6 +9,15 @@ const LoginWithMetaMask = () => {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const { isAuthenticated, login } = useAuth();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   const connectWallet = async () => {
     if (typeof window.ethereum === "undefined") {
@@ -49,10 +60,20 @@ const LoginWithMetaMask = () => {
       });
 
       if (response.data.success) {
-        localStorage.setItem("token", response.data.token);
-        alert("Login successful!");
-        // Optional: redirect user after login
-        // window.location.href = "/";
+        // Show message first
+        if (response.data.isNewUser) {
+          setMessage("Welcome to ECOPORT! Your account has been created.");
+        } else {
+          setMessage("Welcome back! Login successful.");
+        }
+        
+        // Wait a moment, then login and redirect
+        setTimeout(() => {
+          login(account, response.data.token || 'auth_token');
+          setTimeout(() => {
+            navigate("/user");
+          }, 1000);
+        }, 1500);
       } else {
         setError(response.data.message || "Signature verification failed.");
       }
@@ -74,7 +95,7 @@ const LoginWithMetaMask = () => {
         <button onClick={connectWallet}>Connect MetaMask Wallet</button>
       ) : (
         <button disabled title={address}>
-          Connected: {address.slice(0, 6)}...{address.slice(-4)}
+          Connecting . . .
         </button>
       )}
 

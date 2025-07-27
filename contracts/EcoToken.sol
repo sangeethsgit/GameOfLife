@@ -1,41 +1,45 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/**
- * @title EcoToken
- * @dev ERC20 token used as a reward system for eco-friendly transport.
- *      The contract allows the owner (admin) to reward users with ECO tokens,
- *      and users can redeem them for benefits like free rides.
- */
-contract EcoToken is ERC20, Ownable {
-    /**
-     * @dev Constructor initializes token with name, symbol and mints initial supply to deployer.
-     */
-    constructor()
-        ERC20("EcoToken", "ECO")
-        Ownable(msg.sender)  // Set deployer as the owner
-    {
-        _mint(msg.sender, 1000000 * 10 ** decimals());  // Mint 1 million ECO to the deployer
+contract EcoScoreToken is ERC20, Ownable {
+    constructor() ERC20("EcoToken", "ECO") Ownable(msg.sender) {}
+
+    function mint(address to, uint256 amount) external onlyOwner {
+        _mint(to, amount * (10 ** decimals()));
+    }
+}
+
+contract EcoScoreSystem is Ownable {
+    EcoScoreToken public token;
+
+    mapping(address => mapping(string => bool)) public hasClaimed;
+
+    constructor(address tokenAddress) Ownable(msg.sender) {
+        token = EcoScoreToken(tokenAddress);
     }
 
-    /**
-     * @dev Rewards users with ECO tokens. Only owner can call this.
-     * @param to The address to reward
-     * @param amount The number of ECO tokens to reward (not including decimals)
-     */
-    function reward(address to, uint256 amount) external onlyOwner {
-        _mint(to, amount * 10 ** decimals());
+    function claimEcoScore(address user, string memory mode, uint ticketPaid) external onlyOwner {
+        require(ticketPaid == 1, "Ticket not paid");
+
+        require(!hasClaimed[user][mode], "Already claimed for this mode");
+
+        uint reward = getScore(mode);
+        require(reward > 0, "No reward for this mode");
+
+        hasClaimed[user][mode] = true;
+        token.mint(user, reward);
     }
 
-    /**
-     * @dev Allows users to redeem tokens (burn them) in exchange for real-world rewards.
-     *      Example: 100 ECO = 1 free ride.
-     * @param amount The number of ECO tokens to redeem (not including decimals)
-     */
-    function redeem(uint256 amount) external {
-        _burn(msg.sender, amount * 10 ** decimals());
+    function getScore(string memory mode) public pure returns (uint) {
+        bytes32 m = keccak256(abi.encodePacked(mode));
+
+        if (m == keccak256("Metro") || m == keccak256("Water Metro")) return 10;
+        if (m == keccak256("Passenger Train") || m == keccak256("MEMU Train")) return 8;
+        if (m == keccak256("Electric Bus") || m == keccak256("MyByk")) return 5;
+
+        return 0;
     }
 }

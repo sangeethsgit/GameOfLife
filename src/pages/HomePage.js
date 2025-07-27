@@ -1,6 +1,7 @@
 import EcoScore from '../components/EcoScore';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import './HomePage.css';
 
 const kochiPlaces = [
@@ -14,6 +15,13 @@ function HomePage() {
   const [routes, setRoutes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { isAuthenticated, userAddress, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    // Optionally redirect to auth page
+    // window.location.href = '/auth';
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -48,9 +56,20 @@ function HomePage() {
       <header className="header">
         <div className="top-bar">
           <h1>ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
-          <Link to="/auth">
-            <button className="auth-button">Login / Register</button>
-          </Link>
+          {isAuthenticated ? (
+            <div className="auth-section">
+              <span className="user-address">
+                {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
+              </span>
+              <button className="auth-button logout" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/auth">
+              <button className="auth-button">Login / Register</button>
+            </Link>
+          )}
         </div>
         <p>Smart, sustainable transit across Kochi</p>
       </header>
