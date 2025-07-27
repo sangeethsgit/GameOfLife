@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+// import "./Homepage.css";  // For CSS variables and shared styles
+import "./AuthPage.css";  // Your new auth page styles
 
 const LoginWithMetaMask = () => {
   const [address, setAddress] = useState("");
@@ -18,7 +20,6 @@ const LoginWithMetaMask = () => {
       });
       const account = accounts[0];
       setAddress(account);
-      console.log("Connected account:", account);
       setError("");
       await loginWithMetaMask(account);
     } catch (err) {
@@ -30,16 +31,16 @@ const LoginWithMetaMask = () => {
   const loginWithMetaMask = async (account) => {
     try {
       // Step 1: Get nonce from server
-      const { data } = await axios.get(`http://localhost:5000/api/auth/nonce?address=${account}`);
+      const { data } = await axios.get(
+        `http://localhost:5000/api/auth/nonce?address=${account}`
+      );
       const nonce = data.nonce;
-      console.log("Nonce to sign:", nonce);
 
       // Step 2: Ask MetaMask to sign the nonce
       const signature = await window.ethereum.request({
         method: "personal_sign",
         params: [nonce, account], // [message, address]
       });
-      console.log("Signature:", signature);
 
       // Step 3: Send address and signature to backend for verification
       const response = await axios.post("http://localhost:5000/api/auth/verify", {
@@ -47,20 +48,17 @@ const LoginWithMetaMask = () => {
         signature,
       });
 
-      console.log("Verification response:", response.data);
-
       if (response.data.success) {
-        localStorage.setItem('token', response.data.token);
-        alert('Login successful!');
+        localStorage.setItem("token", response.data.token);
+        alert("Login successful!");
         // Optional: redirect user after login
-        // window.location.href = '/';
+        // window.location.href = "/";
       } else {
         setError(response.data.message || "Signature verification failed.");
       }
     } catch (err) {
       console.error("Login error:", err);
       if (err.response) {
-        console.error("Server response:", err.response.data);
         setError(err.response.data.message || err.response.data.error || "Login failed.");
       } else {
         setError("Login failed. Please try again.");
@@ -75,10 +73,13 @@ const LoginWithMetaMask = () => {
       {!address ? (
         <button onClick={connectWallet}>Connect MetaMask Wallet</button>
       ) : (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <button disabled title={address}>
+          Connected: {address.slice(0, 6)}...{address.slice(-4)}
+        </button>
       )}
 
       {error && <p className="error">{error}</p>}
+      {message && <p>{message}</p>}
     </div>
   );
 };
