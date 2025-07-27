@@ -1,11 +1,18 @@
-const hre = require("hardhat");
-
 async function main() {
-  const EcoToken = await hre.ethers.getContractFactory("EcoToken");
-  const ecoToken = await EcoToken.deploy();
+  const [deployer] = await ethers.getSigners();
 
-  console.log("EcoToken deployed to:", await ecoToken.getAddress());
-  console.log(`✅ EcoToken deployed at: ${ecoToken.address}`);
+  const Token = await ethers.getContractFactory("EcoScoreToken");
+  const token = await Token.deploy();
+
+  console.log(`Token deployed to: ${token.target}`);
+
+  const System = await ethers.getContractFactory("EcoScoreSystem");
+  const system = await System.deploy(token.target);
+
+  console.log(`EcoScoreSystem deployed to: ${system.target}`);
+
+  await token.transferOwnership(system.target);
+  console.log(`Ownership of token transferred to EcoScoreSystem`);
 }
 
 main().catch((error) => {
