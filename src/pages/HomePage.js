@@ -14,16 +14,7 @@ function HomePage() {
   const [routes, setRoutes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { isAuthenticated, userAddress, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    // Clear form when logging out
-    setFrom('');
-    setTo('');
-    setRoutes([]);
-    setError('');
-  };
+  const { isAuthenticated } = useAuth();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -45,12 +36,12 @@ function HomePage() {
     setError('');
 
     const mockRoutes = [
-  { id: 0, mode: 'MyByk 🚴‍♂️', duration: '25 mins', price: 10, eco: '🌟 Ultra' }, // new most eco-friendly option
-  { id: 1, mode: 'Kochi Metro 🚇', duration: '30 mins', price: 40, eco: '🌿 High' },
-  { id: 2, mode: 'Electric Bus ⚡️🚌', duration: '45 mins', price: 25, eco: '🌱 High' },
-  { id: 3, mode: 'City Bus 🚌', duration: '50 mins', price: 20, eco: '🌾 Medium' },
-  { id: 4, mode: 'Water Metro 🚤', duration: '35 mins', price: 30, eco: '🌿 High' }
-];
+      { id: 0, mode: 'MyByk 🚴‍♂️', duration: '25 mins', price: 10, eco: '🌟 Ultra' },
+      { id: 1, mode: 'Kochi Metro 🚇', duration: '30 mins', price: 40, eco: '🌿 High' },
+      { id: 2, mode: 'Electric Bus ⚡️🚌', duration: '45 mins', price: 25, eco: '🌱 High' },
+      { id: 3, mode: 'Water Metro 🚤', duration: '35 mins', price: 30, eco: '🌿 High' },
+      { id: 4, mode: 'City Bus 🚌', duration: '50 mins', price: 20, eco: '🌾 Medium' },
+    ];
 
     setTimeout(() => {
       setRoutes(mockRoutes);
@@ -60,33 +51,17 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      <header className="header">
-        <div className="top-bar">
-          <h1>ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
-          {isAuthenticated ? (
-            <div className="auth-section">
-              <span className="user-address">
-                {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
-              </span>
-              <button className="auth-button logout" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link to="/auth">
-              <button className="auth-button">Login / Register</button>
-            </Link>
-          )}
-        </div>
-        <p className="sub-title"> Smart, sustainable transit across Kochi</p>
-      </header>
+      <div className="hero-section">
+        <h1>Welcome to ECOPORT<span role="img" aria-label="Earth">🌍</span></h1>
+        <p className="sub-title">Smart, sustainable transit across Kochi</p>
+      </div>
 
       <main className="main-content">
         <section className="form-section">
           {!isAuthenticated ? (
             <div className="login-prompt">
-              <h2>Welcome to ECOPORT!</h2>
-              <p>Please login or register to start planning your eco-friendly journey.</p>
+              <h2>Start Your Eco-Friendly Journey</h2>
+              <p>Please login or register to start planning your sustainable commute.</p>
               <Link to="/auth">
                 <button className="auth-button large">Login / Register</button>
               </Link>
@@ -120,11 +95,19 @@ function HomePage() {
 
                 {error && <div className="error">{error}</div>}
               </form>
-              <Link to="/rewards" style={{ textDecoration: 'none' }}>
-                <button type="button" className="reward-button">
-                  🎁 See Rewards
-                </button>
-              </Link>
+              
+              <div className="quick-actions">
+                <Link to="/user" style={{ textDecoration: 'none' }}>
+                  <button type="button" className="action-button dashboard-btn">
+                    📊 Dashboard
+                  </button>
+                </Link>
+                <Link to="/rewards" style={{ textDecoration: 'none' }}>
+                  <button type="button" className="action-button reward-btn">
+                    🎁 Rewards
+                  </button>
+                </Link>
+              </div>
             </>
           )}
         </section>
